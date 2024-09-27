@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2232%22 font-size=%2232%22>📝</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Notes</h2>
+        <button class="new-note-btn"><i class="fas fa-plus"></i> &nbsp;New Note</button>
+        <div class="notes-list">
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="note-editor">
+            <input type="text" class="note-title" placeholder="Title">
+            <textarea class="note-body" placeholder="Type your note here..."></textarea>
+            <button class="save-note-btn">Save Note</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
