@@ -61,36 +61,49 @@ saveNoteBtn.addEventListener('click', () => {
 });
 
 // Render the list of notes
-// Render the list of notes
-function renderNotesList() {
+const searchBar = document.getElementById('search-bar');
+
+searchBar.addEventListener('input', () => {
+    const searchText = searchBar.value.toLowerCase();
+    renderNotesList(searchText);
+});
+
+// Update the renderNotesList function to include filtering logic
+function renderNotesList(filterText = '') {
     notesList.innerHTML = '';
 
-    notes.forEach(note => {
-        const noteItem = document.createElement('div');
-        noteItem.className = 'note-item';
+    notes
+        .filter(note => 
+            note.title.toLowerCase().includes(filterText) ||
+            note.body.toLowerCase().includes(filterText)
+        )
+        .forEach(note => {
+            const noteItem = document.createElement('div');
+            noteItem.className = 'note-item';
 
-        // Format the timestamp
-        const timestamp = new Date(note.timestamp);
-        const formattedTimestamp = timestamp.toLocaleDateString() + ' ' + 
-            timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            // Format the timestamp
+            const timestamp = new Date(note.timestamp);
+            const formattedTimestamp = timestamp.toLocaleDateString() + ' ' + 
+                timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        noteItem.innerHTML = `
-            <span>${note.title} <small class="note-timestamp">(${formattedTimestamp})</small></span>
-            <div class="note-buttons">
-                <button onclick="editNote(${note.id})">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button onclick="deleteNote(${note.id})">
-                    <i class="fas fa-trash-alt"></i> 
-                </button>
-            </div>
-        `;
-        // Add click event to the note item
-        noteItem.addEventListener('click', () => {
-            viewNote(note.id);
+            noteItem.innerHTML = `
+                <span>${note.title} <small class="note-timestamp">(${formattedTimestamp})</small></span>
+                <div class="note-buttons">
+                    <button onclick="editNote(${note.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button onclick="deleteNote(${note.id})">
+                        <i class="fas fa-trash-alt"></i> 
+                    </button>
+                </div>
+            `;
+
+            noteItem.addEventListener('click', () => {
+                viewNote(note.id);
+            });
+
+            notesList.appendChild(noteItem);
         });
-        notesList.appendChild(noteItem);
-    });
 }
 
 
