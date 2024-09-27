@@ -9,13 +9,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="sidebar">
-        <h2> My Notes</h2>
-        <input type="text" id="search-bar" class="search-bar" placeholder="Search notes...">
-        <button class="new-note-btn"><i class="fas fa-plus"></i> &nbsp;New Note</button>
-        <div class="notes-list">
+   <div class="sidebar">
+    <h2> My Notes</h2>
+    <input type="text" id="search-bar" class="search-bar" placeholder="Search notes...">
+    <button class="new-note-btn"><i class="fas fa-plus"></i> &nbsp;New Note</button>
+    <h3>Categories</h3>
+    <div class="categories-list">
+        <div class="category" data-category="Uncategorized" style="color: #888;" title="Uncategorized">
+            <i class="fas fa-asterisk"></i>
         </div>
-    </div>    
+        <div class="category" data-category="Work" style="color: #007bff;" title="Work">
+            <i class="fas fa-briefcase"></i>
+        </div>
+        <div class="category" data-category="Personal" style="color: #28a745;" title="Personal">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="category" data-category="Ideas" style="color: #ffc107;" title="Ideas">
+            <i class="fas fa-lightbulb"></i>
+        </div>
+    </div>
+    
+    <h3 class="all-notes-btn">All Notes</h3>
+    <div class="notes-list">
+    </div>
+</div>    
+       
 
     <div class="main-content">
         <div class="note-editor">
