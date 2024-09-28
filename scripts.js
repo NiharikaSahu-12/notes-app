@@ -1,19 +1,3 @@
-// Check for saved user preference in localStorage
-const isDarkMode = localStorage.getItem('darkMode') === 'true';
-if (isDarkMode) {
-    document.body.classList.add('dark-mode');
-}
-
-// Toggle dark mode on button click
-document.getElementById('darkModeToggle').addEventListener('click', function () {
-    document.body.classList.toggle('dark-mode');
-    
-    // Save user preference in localStorage
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    localStorage.setItem('darkMode', isDarkMode);
-});
-
-
 let notes = [];
 let currentNoteId = null;
 const categories = [
