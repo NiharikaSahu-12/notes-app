@@ -7,8 +7,8 @@ A simple notes application built with HTML, CSS, and JavaScript using the Quill 
 - Create new notes
 - Edit existing notes
 - Delete notes
-- Rich text formatting (bold, italic, underline, headings, lists)
-- Insert images with resizing capability
+- Rich text formatting (bold, italic, underline, headings, lists,etc)
+- Insert images
 - Search notes by title or content
 - Categories for organizing notes
 - Persistent storage using localStorage
