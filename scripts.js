@@ -1,3 +1,24 @@
+const toolbarOptions = [
+    ['bold', 'italic', 'underline'],        
+    [{ 'header': [1, 2, 3, false] }],
+    [{ 'font': [] }],
+
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+    
+    [{ 'color': [] }, { 'background': [] }],          
+    [{ 'align': [] }],
+    [{ 'indent': '-1'}, { 'indent': '+1' }],          
+    ['link', 'image', 'video',],
+
+    ];
+  
+  const quill = new Quill('#quill-editor', {
+    modules: {
+      toolbar: toolbarOptions
+    },
+    theme: 'snow'
+  });
+
 let notes = [];
 let currentNoteId = null;
 const categories = [
@@ -139,9 +160,10 @@ newNoteBtn.addEventListener('click', () => {
 });
 
 // Save note function
+// Save note function
 saveNoteBtn.addEventListener('click', () => {
     const title = noteTitle.value;
-    const body = noteBody.value;
+    const body = quill.root.innerHTML; // Get content from the Quill editor
 
     if (title.trim() === '' || body.trim() === '') {
         alert('Title and body cannot be empty.');
@@ -161,7 +183,7 @@ saveNoteBtn.addEventListener('click', () => {
         const note = {
             id: Date.now(),
             title,
-            body,
+            body, // Save content from the Quill editor
             category: 'Uncategorized',
             timestamp
         };
@@ -173,7 +195,7 @@ saveNoteBtn.addEventListener('click', () => {
 
     renderNotesList();
     noteTitle.value = '';
-    noteBody.value = '';
+    quill.root.innerHTML = ''; // Clear the Quill editor
 });
 
 // View note function
@@ -182,7 +204,7 @@ function viewNote(id) {
     if (note) {
         currentNoteId = id;
         noteTitle.value = note.title;
-        noteBody.value = note.body;
+        quill.root.innerHTML = note.body; // Load content into the Quill editor
     }
 }
 
