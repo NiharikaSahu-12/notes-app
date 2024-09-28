@@ -101,25 +101,19 @@ const categoryColors = {
 };
 
 // Updated renderNotesList function to include category colors
-function renderNotesList(filterText = '', category = null) {
+function renderNotesList(filterText = '') {
     notesList.innerHTML = '';
 
     notes
-        .filter(note => 
-            (!category || note.category === category) &&
-            (note.title.toLowerCase().includes(filterText) ||
-            note.body.toLowerCase().includes(filterText))
-        )
+        .filter(note => note.title.toLowerCase().includes(filterText))
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Sort notes by latest timestamp
         .forEach(note => {
             const noteItem = document.createElement('div');
             noteItem.className = 'note-item';
             noteItem.dataset.id = note.id;
-            
-            // Set note left border color based on category
-            noteItem.style.borderLeft = `4px solid ${categoryColors[note.category] || '#ffffff'}`;
 
             const timestamp = new Date(note.timestamp);
-            const formattedTimestamp = timestamp.toLocaleDateString() + ' ' + 
+            const formattedTimestamp = timestamp.toLocaleDateString() + ' ' +
                 timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             noteItem.innerHTML = `
@@ -138,7 +132,6 @@ function renderNotesList(filterText = '', category = null) {
                 viewNote(note.id);
             });
 
-            addDragListeners(noteItem);
             notesList.appendChild(noteItem);
         });
 }
@@ -159,7 +152,6 @@ newNoteBtn.addEventListener('click', () => {
     noteBody.value = '';
 });
 
-// Save note function
 // Save note function
 saveNoteBtn.addEventListener('click', () => {
     const title = noteTitle.value;
@@ -184,7 +176,6 @@ saveNoteBtn.addEventListener('click', () => {
             id: Date.now(),
             title,
             body, // Save content from the Quill editor
-            category: 'Uncategorized',
             timestamp
         };
         notes.push(note);
